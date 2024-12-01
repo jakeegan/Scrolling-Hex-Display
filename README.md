@@ -9,7 +9,22 @@ data over UART and convert the data to a scrolling 7 segment hex display.
 - Accepts external character codes over UART and converts it to the hex display using a lookup table
 
 # Software Diagram
-![](diagram.png)
+```
+
+                         +-------+                                    +------+
+                         |  Isr  |                                    | main |
+                         +-------+                                    +------+
+                       /           \                                      |
+                      v             v                                     v
+     +-------------------+        +-------------------+               +------+
+     |    UartHandler    |        |   TimerHandler    |               | Init |
+     +-------------------+        +-------------------+               +------+
+        /              \                       \
+       v                v                       v
++-----------+    +-----------------+   +-------------------+
+| PrintChar |    | PrintHexDisplay |   | UpdateHexDisplay  |
++-----------+    +-----------------+   +-------------------+
+```
 
 # Running the program
 1. Go to the emulator website at https://cpulator.01xz.net/
